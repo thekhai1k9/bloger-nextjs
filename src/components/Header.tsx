@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Logo from './Logo'
 import { usePathname } from 'next/navigation'
-import { DribbbleIcon, GithubIcon, LinkArrow, LinkedInIcon, MoonIcon, PinterestIcon, SunIcon, TwitterIcon } from './Icon'
+import { DribbbleIcon, GithubIcon, LinkedInIcon, MoonIcon, PinterestIcon, SunIcon, TwitterIcon } from './Icon'
 import { motion } from "framer-motion"
 import useThemeSwitcher from '@/hooks/useThemeSwitcher'
 import { useState } from 'react'
@@ -147,7 +147,6 @@ const Header = () => {
             onClick={() => router.push('auth/sign-in')}
           >
             <span className='px-2'>Sign in</span>
-            <LinkArrow className='w-3.5'/>
           </div>
 
         </nav>
@@ -225,7 +224,6 @@ const Header = () => {
                 onClick={() => router.push('auth/sign-in')}
               >
                 <span className='px-2'>Sign in</span>
-                <LinkArrow className='w-4'/>
               </div>
             </nav>
           </motion.div>
