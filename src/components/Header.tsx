@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Logo from './Logo'
 import { usePathname } from 'next/navigation'
-import { DribbbleIcon, GithubIcon, LinkedInIcon, MoonIcon, PinterestIcon, SunIcon, TwitterIcon } from './Icon'
+import { DribbbleIcon, GithubIcon, LinkArrow, LinkedInIcon, MoonIcon, PinterestIcon, SunIcon, TwitterIcon } from './Icon'
 import { motion } from "framer-motion"
 import useThemeSwitcher from '@/hooks/useThemeSwitcher'
 import { useState } from 'react'
@@ -59,7 +59,7 @@ const CustomMoblieLink: React.FC<CustomLinkMobileIProps> = ({ href, title, class
 
 
 const Header = () => {
-
+  const router = useRouter()
   const [mode, setMode] = useThemeSwitcher()
   const [isOpenModelResponsive, setIsOpenModelResponsive] = useState<boolean>(false)
 
@@ -142,6 +142,14 @@ const Header = () => {
             { mode === "dark" ? <SunIcon className="fill-dark"/> : <MoonIcon className="fill-dark"/>}
           </button>
 
+          <div 
+            className='ml-4 font-bold flex items-center justify-center cursor-pointer dark:hover:text-light/75 hover:text-dark/75 text-sm'
+            onClick={() => router.push('auth/sign-in')}
+          >
+            <span className='px-2'>Sign in</span>
+            <LinkArrow className='w-3.5'/>
+          </div>
+
         </nav>
       </div>
 
@@ -212,6 +220,13 @@ const Header = () => {
                 { mode === "dark" ? <MoonIcon className="fill-dark"/> : <SunIcon className="fill-dark"/>}
               </button>
 
+              <div 
+                className='ml-4 font-bold flex items-center justify-center cursor-pointer hover:text-dark/80 text-light dark:text-dark'
+                onClick={() => router.push('auth/sign-in')}
+              >
+                <span className='px-2'>Sign in</span>
+                <LinkArrow className='w-4'/>
+              </div>
             </nav>
           </motion.div>
         )
