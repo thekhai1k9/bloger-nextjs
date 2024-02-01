@@ -1,11 +1,11 @@
 'use client'
 
 import AnimationText from "@/components/AnimationText"
-import Layout from "@/components/Layout"
+import Layout from "@/components/Layouts/Layout"
 import Head from "next/head"
 import React, { useEffect, useRef } from "react"
 import Image from "next/image"
-import profilePic from "../../../public/images/profile/developer-pic-2.jpg"
+import profilePic from "../../../public/images/profile/developer-pic-2.png"
 import { useInView, useMotionValue, useSpring } from "framer-motion"
 import Skills from "@/app/about/_components/Skills"
 import Experience from "@/app/about/_components/Experience"
@@ -66,7 +66,7 @@ const about = () => {
                 </p>
                 <p className="my-4 font-medium">
                   - I believe that design is about more than just making things
-                  look pretty – it's about solving problems and creating
+                  look pretty – it about solving problems and creating
                   intuitive, enjoyable experiences for users.
                 </p>
                 <p className="font-medium">

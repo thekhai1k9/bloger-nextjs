@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import Logo from './Logo'
+import Logo from '../../Logo'
 import { usePathname } from 'next/navigation'
-import { DribbbleIcon, GithubIcon, LinkedInIcon, MoonIcon, PinterestIcon, SunIcon, TwitterIcon } from './Icon'
+import { DribbbleIcon, GithubIcon, LinkedInIcon, MoonIcon, PinterestIcon, SunIcon, TwitterIcon } from '../../Icon'
 import { motion } from "framer-motion"
 import useThemeSwitcher from '@/hooks/useThemeSwitcher'
 import { useState } from 'react'

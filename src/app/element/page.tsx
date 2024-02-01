@@ -1,5 +1,5 @@
 import AnimationText from '@/components/AnimationText'
-import Layout from '@/components/Layout'
+import Layout from '@/components/Layouts/Layout'
 import Head from 'next/head'
 import React from 'react'
 import FeaturedElements from './_components/FeaturedElement'

@@ -1,8 +1,9 @@
-import Header from "@/components/Header"
+import Header from "@/components/Layouts/MainLayout/Header"
 import "./globals.css"
 import {Montserrat} from "next/font/google"
 import React from "react"
-import Footer from "@/components/Footer"
+import Footer from "@/components/Layouts/MainLayout/Footer"
+import TranstackProvider from "@/components/Providers/TanstackProvider"
 
 const montserrat = Montserrat({
   subsets: ["latin"], 
@@ -19,9 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${montserrat.variable} font-mont bg-light w-full min-h-screen dark:bg-dark`}>
       {/* xl:p-24 lg:p-16 md:p-12 sm:p-8 */}
-        <Header/>
-          {children}
-        <Footer/>
+        <TranstackProvider>
+          <Header/>
+            {children}
+          <Footer/>
+        </TranstackProvider>
       </body>
     </html>
   )

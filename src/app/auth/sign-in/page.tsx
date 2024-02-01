@@ -1,7 +1,7 @@
 'use client'
 
 import { EmailIcon, FaceBookIcon, GithubIcon, GoogleICon, PasswordIcon } from '@/components/Icon'
-import Layout from '@/components/Layout'
+import Layout from '@/components/Layouts/Layout'
 import TransitionEffect from '@/components/TransitionEffect'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -45,7 +45,7 @@ const page = () => {
                     <FaceBookIcon className='w-8 h-8'/>
                   </motion.a>
                   <motion.a href={'#'} target={'_blank'} whileHover={{y: -2}} className='border-2 border-light/70 rounded-full mx-3 dark:border-transparent dark:p-0 dark:rounded-full dark:bg-dark'>
-                    <GithubIcon className='w-8 h-8'/>
+                    <GithubIcon className='!w-[32px]'/>
                   </motion.a>
                 </div>
                 <p className='text-dark/60 my-3 text-sm dark:!text-dark'>or use your email account</p>
