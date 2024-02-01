@@ -10,14 +10,14 @@ import { motion } from "framer-motion"
 import AnimationText from '@/components/AnimationText'
 
 const page = () => {
-  const [formData, setFormDate] = useState({})
-  const handleChange = (e: any) => {
-    setFormDate({...formData, [e.target.name]: e.target.value})
-  }
+  // const [formData, setFormDate] = useState({})
+  // const handleChange = (e: any) => {
+  //   setFormDate({...formData, [e.target.name]: e.target.value})
+  // }
 
-  const handleSubmit = () => {
-    console.log("run", 456)
-  }
+  // const handleSubmit = () => {
+  //   console.log("run", 456)
+  // }
   return (
     <React.Fragment>
       <Head>
@@ -49,7 +49,7 @@ const page = () => {
                 </div>
                 <p className='text-dark/60 my-3 text-sm dark:!text-dark'>or use your email account</p>
                 
-                <form className='flex flex-col items-center' onSubmit={handleSubmit}>
+                <form className='flex flex-col items-center'>
                   <div className='bg-gray-200 p-2 flex items-center mb-3 rounded-3xl'> 
                     <GithubIcon className='w-6 mr-3 sm:mx-1 dark:bg-dark dark:rounded-full'/>
                     <input type='text' name='username' placeholder='User name' className='bg-gray-200 outline-none text-sm'/>
@@ -61,7 +61,7 @@ const page = () => {
                       name='email' 
                       placeholder='Email' 
                       className='bg-gray-200 outline-none text-sm'
-                      onChange={handleChange}
+                      // onChange={handleChange}
                     />
                   </div>
                   <div className='bg-gray-200 p-2 flex items-center mb-3 rounded-3xl'> 
@@ -71,7 +71,7 @@ const page = () => {
                       name='password' 
                       placeholder='Password' 
                       className='bg-gray-200 outline-none text-sm'
-                      onChange={handleChange}
+                      // onChange={handleChange}
                     />
                   </div>
                   <div className='flex justify-center w-64 mb-5'>

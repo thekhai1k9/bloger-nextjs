@@ -10,14 +10,14 @@ import { motion } from "framer-motion"
 import AnimationText from '@/components/AnimationText'
 
 const page = () => {
-  const [formData, setFormData] = useState({})
-  const handleChange = (e: any) => {
-    setFormData({...formData, [e.target.name] : e.target.value})
-  }
+  // const [formData, setFormData] = useState({})
+  // const handleChange = (e: any) => {
+  //   setFormData({...formData, [e.target.name] : e.target.value})
+  // }
 
-  const handleSubmit = () => {
-    console.log("run", 123)
-  }
+  // const handleSubmit = () => {
+  //   console.log("run", 123)
+  // }
 
   return (
     <React.Fragment>
@@ -50,7 +50,7 @@ const page = () => {
                 </div>
                 <p className='text-dark/60 my-3 text-sm dark:!text-dark'>or use your email account</p>
                 
-                <form className='flex flex-col items-center' onSubmit={handleSubmit}>
+                <form className='flex flex-col items-center'>
                   <div className='bg-gray-200 p-2 flex items-center mb-3 rounded-3xl'> 
                     <EmailIcon className='w-4 h-4 mr-3 sm:mx-1 dark:rounded-full'/>
                     <input 
@@ -58,7 +58,7 @@ const page = () => {
                       name='email' 
                       placeholder='Email' 
                       className='bg-gray-200 outline-none text-sm'
-                      onChange={handleChange}
+                      // onChange={handleChange}
                     />
                   </div>
                   <div className='bg-gray-200 p-2 flex items-center mb-3 rounded-3xl'> 
@@ -68,12 +68,12 @@ const page = () => {
                       name='password' 
                       placeholder='Password' 
                       className='bg-gray-200 outline-none text-sm'
-                      onChange={handleChange}
+                      // onChange={handleChange}
                     />
                   </div>
                   <div className='flex justify-center w-64 mb-5'>
                     <span className='flex items-center text-xs dark:text-dark'>
-                      Dont't have an account?<Link href={'#'} className='text-xs text-blueLink ml-2 hover:text-blueLink/80 font-bold'>Sign up</Link>
+                      Dont not have an account?<Link href={'#'} className='text-xs text-blueLink ml-2 hover:text-blueLink/80 font-bold'>Sign up</Link>
                     </span>
                   </div>
                   <button 
