@@ -141,14 +141,6 @@ const Header = () => {
           >
             { mode === "dark" ? <SunIcon className="fill-dark"/> : <MoonIcon className="fill-dark"/>}
           </button>
-
-          <div 
-            className='ml-4 font-bold flex items-center justify-center cursor-pointer dark:hover:text-light/75 hover:text-dark/75 text-sm'
-            onClick={() => router.push('auth/sign-in')}
-          >
-            <span className='px-2'>Sign in</span>
-          </div>
-
         </nav>
       </div>
 
@@ -218,13 +210,6 @@ const Header = () => {
               >
                 { mode === "dark" ? <MoonIcon className="fill-dark"/> : <SunIcon className="fill-dark"/>}
               </button>
-
-              <div 
-                className='ml-4 font-bold flex items-center justify-center cursor-pointer hover:text-dark/80 text-light dark:text-dark'
-                onClick={() => router.push('auth/sign-in')}
-              >
-                <span className='px-2'>Sign in</span>
-              </div>
             </nav>
           </motion.div>
         )
