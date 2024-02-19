@@ -4,7 +4,7 @@ import ListIcon from '../../../components/ListIcon'
 
 interface DetailsIProps {
   type: string,
-  info: string,
+  info?: string,
   time: any,
   place: string
 }
@@ -49,25 +49,9 @@ const Education = () => {
         />
         <ul className='w-full flex flex-col items-center justify-between ml-4 xs:ml-2'>
           <Details
-            type="Bachelor Of Science In Computer Science"
-            time="2016-2020"
-            place="Massachusetts Institute Of Technology (MIT)"
-            info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial 
-            Intelligence."
-          />
-          <Details
-            type="Bachelor Of Science In Computer Science"
-            time="2016-2020"
-            place="Massachusetts Institute Of Technology (MIT)"
-            info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial 
-            Intelligence."
-          />
-          <Details
-            type="Bachelor Of Science In Computer Science"
-            time="2016-2020"
-            place="Massachusetts Institute Of Technology (MIT)"
-            info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial 
-            Intelligence."
+            type="Posts and Telecommunications Institute of Technology"
+            time="2018-2023"
+            place="Electronics and telecommunications engineering"
           />
         </ul>
       </div>
