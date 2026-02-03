@@ -112,8 +112,8 @@ export const AIChatBot = () => {
                 <Bot size={18} />
               </div>
               <div>
-                <p className="font-bold text-sm leading-none">AI Assistant</p>
-                <p className="text-[10px] text-white/70 tracking-tight">Cung cấp bởi Gemini 2.5</p>
+                <p className="font-bold text-sm leading-none">Trợ lý AI with API Gemini</p>
+                <p className="text-[10px] text-white/70 tracking-tight">Khải Phùng Build with all for love!</p>
               </div>
             </div>
             <button onClick={() => setIsOpen(false)} className="hover:bg-white/10 p-1 rounded-md transition-colors">
