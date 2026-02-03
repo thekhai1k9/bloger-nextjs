@@ -10,15 +10,6 @@ import { motion } from "framer-motion"
 import AnimationText from '@/components/AnimationText'
 
 const page = () => {
-  // const [formData, setFormData] = useState({})
-  // const handleChange = (e: any) => {
-  //   setFormData({...formData, [e.target.name] : e.target.value})
-  // }
-
-  // const handleSubmit = () => {
-  //   console.log("run", 123)
-  // }
-
   return (
     <React.Fragment>
       <Head>
@@ -31,7 +22,7 @@ const page = () => {
           <div className='bg-light/80 rounded-2xl shadow-2xl flex justify-center text-center'>
             <div className='w-3/5 p-5'>
               <div className='text-left font-bold dark:text-dark'>
-                <span className='text-primary'>LG</span>BLOG
+                <span className='text-primary'>KP</span>BLOG
               </div>  
               <div className='py-10'>
                 <AnimationText className='!text-3xl font-bold text-primary mb-2 dark:!text-dark' text="Sign in to Account"/>
@@ -58,7 +49,6 @@ const page = () => {
                       name='email' 
                       placeholder='Email' 
                       className='bg-gray-200 outline-none text-sm'
-                      // onChange={handleChange}
                     />
                   </div>
                   <div className='bg-gray-200 p-2 flex items-center mb-3 rounded-3xl'> 
@@ -68,7 +58,6 @@ const page = () => {
                       name='password' 
                       placeholder='Password' 
                       className='bg-gray-200 outline-none text-sm'
-                      // onChange={handleChange}
                     />
                   </div>
                   <div className='flex justify-center w-64 mb-5'>

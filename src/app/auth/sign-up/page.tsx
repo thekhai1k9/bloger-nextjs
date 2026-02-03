@@ -30,7 +30,7 @@ const page = () => {
           <div className='bg-light/80 rounded-2xl shadow-2xl flex justify-center text-center'>
             <div className='w-3/5 p-5'>
               <div className='text-left font-bold'>
-                <span className='text-primary dark:text-dark'>LG</span>BLOG
+                <span className='text-primary dark:text-dark'>KP</span>BLOG
               </div>  
               <div className='py-10'>
                 <AnimationText className='!text-3xl font-bold text-primary mb-2 dark:!text-dark' text="Sign out to Account"/>

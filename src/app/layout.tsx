@@ -4,6 +4,7 @@ import {Montserrat} from "next/font/google"
 import React from "react"
 import Footer from "@/components/Layouts/MainLayout/Footer"
 import TranstackProvider from "@/components/Providers/TanstackProvider"
+import { AIChatBot } from "@/components/AIChatbox"
 
 const montserrat = Montserrat({
   subsets: ["latin"], 
@@ -25,6 +26,7 @@ export default function RootLayout({
             {children}
           <Footer/>
         </TranstackProvider>
+          <AIChatBot/>
       </body>
     </html>
   )
