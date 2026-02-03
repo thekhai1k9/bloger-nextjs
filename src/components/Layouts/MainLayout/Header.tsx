@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Logo from '../../Logo'
 import { usePathname } from 'next/navigation'
-import { DribbbleIcon, GithubIcon, LinkedInIcon, MoonIcon, PinterestIcon, SunIcon, TwitterIcon } from '../../Icon'
+import { DribbbleIcon, GithubIcon, LinkedInIcon, MoonIcon, PinterestIcon, SunIcon, TwitterIcon,  } from '../../Icon'
 import { motion } from "framer-motion"
 import useThemeSwitcher from '@/hooks/useThemeSwitcher'
 import { useState } from 'react'
@@ -82,8 +82,8 @@ const Header = () => {
         <nav>
           <CustomLink href="/" title='Home' className='mr-4'/>
           <CustomLink href="/about" title='About' className='mx-4'/>
-          <CustomLink href="/element" title='Element' className='mx-4'/>
-          <CustomLink href="/articles" title='Articles' className='mx-4'/>
+          {/* <CustomLink href="/element" title='Element' className='mx-4'/> */}
+          {/* <CustomLink href="/articles" title='Articles' className='mx-4'/> */}
           <CustomLink href="/contact" title='Contact' className='ml-4'/>
         </nav>
         <nav className='flex items-center justify-center flex-wrap'>
@@ -138,6 +138,13 @@ const Header = () => {
           >
             { mode === "dark" ? <SunIcon className="fill-dark"/> : <MoonIcon className="fill-dark"/>}
           </button>
+
+          <div 
+            className='ml-4 font-bold flex items-center justify-center cursor-pointer dark:hover:text-light/75 hover:text-dark/75 text-sm'
+            onClick={() => router.push('auth/sign-in')}
+          >
+            <span className='px-2'>Sign in</span>
+          </div>
         </nav>
       </div>
 
@@ -151,8 +158,8 @@ const Header = () => {
             <nav className='flex items-center flex-col justify-center'>
               <CustomMoblieLink href="/" title='Home' className=''  toggle={handleClickOpenModalReponsive}/>
               <CustomMoblieLink href="/about" title='About' className='=' toggle={handleClickOpenModalReponsive} />
-              <CustomMoblieLink href="/element" title='Element' className='=' toggle={handleClickOpenModalReponsive}/>
-              <CustomMoblieLink href="/articles" title='Articles' className='=' toggle={handleClickOpenModalReponsive}/>
+              {/* <CustomMoblieLink href="/element" title='Element' className='=' toggle={handleClickOpenModalReponsive}/> */}
+              {/* <CustomMoblieLink href="/articles" title='Articles' className='=' toggle={handleClickOpenModalReponsive}/> */}
               <CustomMoblieLink href="/contact" title='Contact' className='' toggle={handleClickOpenModalReponsive}/>
             </nav>
             <nav className='flex items-center justify-center flex-wrap mt-2'>

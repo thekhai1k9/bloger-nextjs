@@ -5,6 +5,8 @@ import React from "react"
 import Footer from "@/components/Layouts/MainLayout/Footer"
 import TranstackProvider from "@/components/Providers/TanstackProvider"
 import { AIChatBot } from "@/components/AIChatbox"
+import { Toaster } from 'react-hot-toast'
+
 
 const montserrat = Montserrat({
   subsets: ["latin"], 
@@ -23,10 +25,11 @@ export default function RootLayout({
       {/* xl:p-24 lg:p-16 md:p-12 sm:p-8 */}
         <TranstackProvider>
           <Header/>
+            <Toaster position="top-right" reverseOrder={false} />
             {children}
           <Footer/>
         </TranstackProvider>
-          <AIChatBot/>
+        <AIChatBot/>
       </body>
     </html>
   )

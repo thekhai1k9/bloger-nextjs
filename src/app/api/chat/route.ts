@@ -13,10 +13,9 @@ export const POST = async (req: Request) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [
-          // Đây là chỗ "dạy" nó làm trợ lý cho ông
           { role: "user", parts: [{ text: "Bạn là trợ lý ảo của Khải. Hãy luôn xưng hô thân thiện và hỗ trợ hết mình." }] },
           { role: "model", parts: [{ text: "Đã rõ, tôi là trợ lý ảo của anh Khải!" }] },
-          // Các tin nhắn cũ để AI nhớ ngữ cảnh
+
           ...messages.map((m: any) => ({
             role: m.role === 'user' ? 'user' : 'model',
             parts: [{ text: m.content }]
