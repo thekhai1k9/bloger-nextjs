@@ -1,6 +1,6 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { CSSICon, ExpressJSIcon, HTMLIcon, JSIcon, LinuxIcon, ReactIcon, TypeScriptIcon } from "../../../components/Icon"
+import { CSSICon, ExpressJSIcon, HTMLIcon, JSIcon, LinuxIcon, NodeIcon, PythonIcon, ReactIcon, TypeScriptIcon } from "../../../components/Icon"
 
 interface SkillIProps {
   children: React.ReactNode
@@ -42,10 +42,12 @@ const Skills = () => {
         </motion.div>
         <Skill x="-10vw" y="2vw"><HTMLIcon/></Skill>
         <Skill x="-7vw" y="-7vw"><CSSICon/></Skill>
+        <Skill x="-19vw" y="-1vw"><PythonIcon/></Skill>
+        <Skill x="-26vw" y="7vw"><NodeIcon/></Skill>
         <Skill x="10vw" y="6vw"><JSIcon/></Skill>
         <Skill x="-2vw" y="12vw"><ReactIcon/></Skill>
-        <Skill x="15vw" y="-8vw"><ExpressJSIcon className="!w-20 !h-20 dark:bg-light"/></Skill>
-        <Skill x="-20vw" y="-12vw"><TypeScriptIcon/></Skill>
+        <Skill x="15vw" y="-8vw"><ExpressJSIcon className="!w-20 !h-20 dark:bg-light dark:px-2"/></Skill>
+        <Skill x="-18vw" y="-12vw"><TypeScriptIcon/></Skill>
         <Skill x="25vw" y="-1vw"><LinuxIcon/></Skill>
       </div>
     </React.Fragment>
