@@ -5,7 +5,7 @@ import Layout from '@/components/Layouts/Layout'
 import TransitionEffect from '@/components/TransitionEffect'
 import Head from 'next/head'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from "framer-motion"
 import AnimationText from '@/components/AnimationText'
 

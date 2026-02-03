@@ -8,9 +8,19 @@ export const AIChatBot = () => {
   const [messages, setMessages] = useState<{ role: string, content: string, id: number }[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [showPulse, setShowPulse] = useState(true)
   
   const scrollRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null) // Ref để kiểm tra vùng trong modal
+
+  // Tự động tắt nháy sau 1000ms
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPulse(false)
+    }, 10000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   // 1. Tự động cuộn xuống
   useEffect(() => {
@@ -91,13 +101,22 @@ export const AIChatBot = () => {
     <div className="fixed bottom-6 right-6 z-[9999]">
       {/* Nút bấm mở chat */}
       {!isOpen && (
-        <button 
-          onClick={() => setIsOpen(true)}
-          className="bg-[#6366f1] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all flex items-center gap-2"
-        >
-          <MessageCircle size={24} />
-          <span className="font-semibold text-sm hidden md:inline">Hỏi AI về tôi</span>
-        </button>
+        <div className="relative">
+          {showPulse && (
+            <span className="absolute inset-0 rounded-full bg-[#6366f1] animate-ping opacity-75"></span>
+          )}
+          
+          <button 
+            onClick={() => {
+              setIsOpen(true)
+              setShowPulse(false)
+            }}
+            className="relative bg-[#6366f1] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all flex items-center gap-2 group"
+          >
+            <MessageCircle size={24} className="group-hover:rotate-12 transition-transform" />
+            <span className="font-semibold text-sm hidden md:inline">Hỏi AI về tôi</span>
+          </button>
+        </div>
       )}
 
       {isOpen && (
