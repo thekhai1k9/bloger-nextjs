@@ -5,8 +5,11 @@ import Head from 'next/head'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import FormContactSendMail from './_components/FormContactSendMail'
+import { useRouter } from 'next/navigation'
+
 
 const ContactSendMail = () => {
+  const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false)
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,6 +34,8 @@ const ContactSendMail = () => {
 
       toast.success('Message sent successfully')
       form.reset()
+      router.push('/')
+
     } catch (error) {
       toast.error('Something went wrong')
     } finally {
