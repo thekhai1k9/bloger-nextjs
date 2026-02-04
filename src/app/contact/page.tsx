@@ -6,8 +6,8 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import FormContactSendMail from './_components/FormContactSendMail'
 
-const page = () => {
-  const [loading, setLoading] = useState(false)
+const ContactSendMail = () => {
+  const [loading, setLoading] = useState<boolean>(false)
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -38,13 +38,6 @@ const page = () => {
     }
   }
 
-  if (loading) {
-    toast('Please wait before sending again...', {
-      icon: '⚠️',
-    })
-    return
-  }
-
   return (
     <React.Fragment>
       <Head>
@@ -57,4 +50,4 @@ const page = () => {
   )
 }
 
-export default page
+export default ContactSendMail
