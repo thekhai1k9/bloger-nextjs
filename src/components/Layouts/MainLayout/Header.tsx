@@ -105,7 +105,7 @@ const Header = () => {
             <GithubIcon className=''/>
           </motion.a>
           <motion.a 
-            href='/https:/linked.com' 
+            href='https://linkedin.com' 
             target={'_blank'}
             className='w-6 mr-3'
             whileHover={{y: -2}}
@@ -114,7 +114,7 @@ const Header = () => {
             <LinkedInIcon className=''/>
           </motion.a>
           <motion.a 
-            href='https:/printerest.com' 
+            href='https://pinterest.com' 
             target={'_blank'}
             className='w-6 mr-3'
             whileHover={{y: -2}}
@@ -123,7 +123,7 @@ const Header = () => {
             <PinterestIcon className=''/>
           </motion.a>
           <motion.a 
-            href='https:/dribble.com' 
+            href='https://dribbble.com' 
             target={'_blank'}
             className='w-6 mr-3'
             whileHover={{y: -2}}
@@ -181,7 +181,7 @@ const Header = () => {
                 <GithubIcon className='bg-light rounded-full dark:bg-dark sm:mx-1'/>
               </motion.a>
               <motion.a 
-                href='/https:/linked.com' 
+                href='https://linkedin.com' 
                 target={'_blank'}
                 className='w-6 mr-3 sm:mx-1'
                 whileHover={{y: -2}}
@@ -190,7 +190,7 @@ const Header = () => {
                 <LinkedInIcon className=''/>
               </motion.a>
               <motion.a 
-                href='https:/printerest.com' 
+                href='https://pinterest.com' 
                 target={'_blank'}
                 className='w-6 mr-3 sm:mx-1'
                 whileHover={{y: -2}}
@@ -199,7 +199,7 @@ const Header = () => {
                 <PinterestIcon className=''/>
               </motion.a>
               <motion.a 
-                href='https:/dribble.com' 
+                href='https://dribbble.com' 
                 target={'_blank'}
                 className='w-6 mr-3 sm:mx-1'
                 whileHover={{y: -2}}

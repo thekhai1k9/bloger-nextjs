@@ -1,6 +1,5 @@
 import AnimationText from "@/components/AnimationText"
 import Layout from "@/components/Layouts/Layout"
-import Head from "next/head"
 import React from "react"
 import article1 from "../../../public/images/articles/What is Redux with easy explanation.png"
 import article2 from "../../../public/images/articles/form validation in reactjs using custom react hook.png"
@@ -10,14 +9,16 @@ import article5 from "../../../public/images/articles/todo list app built using 
 import FeaturedArticle from "./_components/FeaturedArticle"
 import Articles from "./_components/Articles"
 import TransitionEffect from "@/components/TransitionEffect"
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Articles',
+  description: 'Đọc các bài viết mới nhất về lập trình React, Next.js và phát triển phần mềm của Khải Phùng.',
+}
 
 const page = () => {
   return (
     <React.Fragment>
-      <Head>
-        <title>Code Bug || Articles Page</title>
-        <meta name="description" content="any description"></meta>
-      </Head>
       <TransitionEffect/>
       <main className="w-full mb-16 flex flex-col items-center justify-center overflow-hidden dark:text-light">
         <Layout className="pt-16">
