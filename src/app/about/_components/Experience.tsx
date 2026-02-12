@@ -61,22 +61,22 @@ const Experience = () => {
             position="Web Developer"
             company="CÔNG TY TNHH DIDOTEK"
             time="11/2022 - 02/2024"
-            info="https://cms.ags99.vn/dang-nhap"
+            info="https://cms.ags99.vn"
             work="Lập trình front end & api cho trang quản trị của hệ thống bán vé máy bay Thành Hoàng"
           />
           <Details
             position="Front End Developer"
             company="Thực tập sinh tại Công ty Cổ Phần Công Nghệ Citek"
             time="06/2021 - 12/2022"
-            info="https://demo-pos.citek.vn/auth/login"
+            info="https://demo-pos.citek.vn"
             work="Lập trình front end cho ứng dụng POS bán hàng của công ty cổ phần công nghê Citek."
           />
           <Details
             position="Web developer"
             company="Website cá nhân blog"
             time="07/2023"
-            info="https://github.com/thekhai1k9/blogg"
-            work="Lập trình front end và api cho website blog cá nhân."
+            info="https://bloger-nextjs.vercel.app/"
+            work="Lập trình blog cá nhân với nextjs."
           />
           <Details
             position="Thực tập sinh IT Support"
