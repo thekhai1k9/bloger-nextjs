@@ -36,6 +36,8 @@ const ContactContent = () => {
 
     } catch (error) {
       toast.error('Something went wrong')
+      form.reset()
+      router.push('/')
     } finally {
       setLoading(false)
     }
