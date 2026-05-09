@@ -142,7 +142,7 @@ export const AIChatBot = () => {
       console.error("Lỗi:", err)
       setMessages(prev => prev.map(msg => msg.id === assistantId ? { 
         ...msg, 
-        content: "Xin lỗi, tôi đang gặp sự cố kết nối. Vui lòng kiểm tra lại mạng hoặc thử lại sau." 
+        content: "Xin lỗi, tôi đang gặp sự cố kết nối. Vui lòng kiểm tra lại mạng hoặc thử lại sau vài phút!" 
       } : msg))
     } finally {
       setIsLoading(false)
