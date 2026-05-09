@@ -57,7 +57,7 @@ const SignInContent = () => {
                   </div>
                   <div className='flex justify-center w-64 mb-5'>
                     <span className='flex items-center text-xs dark:text-dark'>
-                      Dont not have an account?<Link href={'/auth/sign-up'} className='text-xs text-blueLink ml-2 hover:text-blueLink/80 font-bold'>Sign up</Link>
+                      Dont not have an account?<Link href={'sign-up'} className='text-xs text-blueLink ml-2 hover:text-blueLink/80 font-bold'>Sign up</Link>
                     </span>
                   </div>
                   <button 
