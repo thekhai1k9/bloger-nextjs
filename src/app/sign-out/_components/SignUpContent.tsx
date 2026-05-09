@@ -61,7 +61,7 @@ const SignUpContent = () => {
                   </div>
                   <div className='flex justify-center w-64 mb-5'>
                     <span className='flex items-center text-xs dark:text-dark'>
-                      Have an account?<Link href={'sign-in'} className='text-xs text-blueLink ml-2 hover:text-blueLink/80 font-bold'>Sign in</Link>
+                      Have an account?<Link href={'/sign-in'} className='text-xs text-blueLink ml-2 hover:text-blueLink/80 font-bold'>Sign in</Link>
                     </span>
                   </div>
                   <button 
@@ -77,7 +77,7 @@ const SignUpContent = () => {
               <h2 className='text-3xl font-bold mb-2'>Hello, friend!</h2>
               <div className='border-2 w-10 border-light inline-block mb-2'/>
               <p className='mb-10 text-sm'>Fill up personal information and start journey with us.</p>
-              <Link href='sign-in' className='border-2 border-light rounded-full px-12 py-2 inline-block font-semibold hover:bg-white/80 hover:text-primary lg:text-sm md:text-[10px] md:!px-10 sm:!px-5'>Sign In</Link>
+              <Link href='/sign-in' className='border-2 border-light rounded-full px-12 py-2 inline-block font-semibold hover:bg-white/80 hover:text-primary lg:text-sm md:text-[10px] md:!px-10 sm:!px-5'>Sign In</Link>
             </div>
           </div>
         </Layout>
