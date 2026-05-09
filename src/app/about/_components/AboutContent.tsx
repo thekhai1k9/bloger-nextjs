@@ -55,9 +55,9 @@ const AboutContent = () => {
                   Biography
                 </h2>
                 <p className="font-medium">
-                  HI, I AM KHAI PHUNG, A WEB DEVELOPER AND UI/UX DESIGNER WITH A
+                  HI, I AM KHAI PHUNG, A SOFTWARE ENGINEER AND UI/UX DESIGNER WITH A
                   PASSION FOR CREATING BEAUTIFUL, FUNCTIONAL, AND USER-CENTERED
-                  DIGITAL EXPERIENCES. WITH 2 YEARS OF EXPERIENCE IN THE FIELD.
+                  DIGITAL EXPERIENCES. WITH 03 YEARS OF EXPERIENCE IN THE FIELD.
                   I AM ALWAYS LOOKING FOR NEW AND INNOVATIVE WAYS TO BRING MY
                   CLIENTS VISIONS TO LIFE.
                 </p>

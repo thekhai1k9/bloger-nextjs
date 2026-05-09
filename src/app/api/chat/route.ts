@@ -15,23 +15,23 @@ export const POST = async (req: Request) => {
 
     Dưới đây là thông tin chi tiết về Khải Phùng:
     - **Họ tên:** Khải Phùng
-    - **Vị trí:** Web Developer (chuyên về React.js, Next.js, ExpressJS, Python, Web Development).
+    - **Vị trí:** Software Engineer (chuyên về React.js, Next.js, ExpressJS, Python, Web Development).
     - **Email:** thekhai1k9@gmail.com
     - **Số điện thoại:** 0393245953
     - **CV (Resume):** Có thể tải xuống tại đường dẫn: /dummy.pdf
     
     - **Kỹ năng (Skills):**
-      - Web: HTML, CSS, JavaScript (ES6+), TypeScript, React.js, Next.js, Node.js, Express.js.
-      - Ngôn ngữ khác: Python.
-      - Hệ thống/Công cụ: Linux, Git, Docker, PostMan, PostgreSql, MySql.
+      - Web: HTML, CSS, JavaScript (ES6+), TypeScript, React.js, Next.js, Node.js, Express.js, RestfullAPI, gRPC, SSE, Socket.io.
+      - Ngôn ngữ khác: Python (Flask), GO (GIN).
+      - Hệ thống/Công cụ: Linux, Git, Docker, PostMan, PostgreSql, MySql, Docker, Redis, Kafa, RabbitMQ, Jira, Slack.
 
     - **Học vấn (Education):**
       - Học viện Công nghệ Bưu chính Viễn thông (PTIT) - Kỹ thuật Điện tử Viễn thông (2018 - 2023).
 
     - **Kinh nghiệm làm việc (Experience):**
-      1. **Web Developer tại CÔNG TY TNHH DIDOTEK** (11/2022 - 02/2024):
-        - Phát triển Front-end & API cho hệ thống bán vé máy bay Thành Hoàng (ags99.vn) và trang quản trị (cms.ags99.vn).
-        - Công nghệ: ReactJS, .NET Core API.
+      1. **Software Engineer tại CÔNG TY TNHH DIDOTEK** (11/2022 - 01/2026):
+        - Phát triển Front-end & API cho hệ thống vé máy bay Thành Hoàng (ags99.vn) và trang quản trị (cms.ags99.vn).
+        - Công nghệ: ReactJS, Python (Flask) API.
       2. **Front End Developer (Thực tập) tại Citek** (06/2021 - 12/2022):
         - Phát triển Front-end cho ứng dụng POS bán hàng.
         - Công nghệ: ReactJS, Redux.
@@ -51,7 +51,7 @@ export const POST = async (req: Request) => {
       body: JSON.stringify({
         contents: [
           { role: "user", parts: [{ text: systemPrompt }] },
-          { role: "model", parts: [{ text: "Đã rõ. Tôi là trợ lý ảo của Khải Phùng. Tôi đã ghi nhớ toàn bộ thông tin về kỹ năng, kinh nghiệm và học vấn của Khải. Tôi sẵn sàng trả lời các câu hỏi." }] },
+          { role: "model", parts: [{ text: "Đã rõ. Tôi là trợ lý ảo của Software Engineer Khai Phung. Tôi đã ghi nhớ toàn bộ thông tin về kỹ năng, kinh nghiệm và học vấn của Khải. Tôi sẵn sàng trả lời các câu hỏi của bạn?" }] },
           ...messages.map((m: any) => ({
             role: m.role === 'user' ? 'user' : 'model',
             parts: [{ text: m.content }]
@@ -61,14 +61,20 @@ export const POST = async (req: Request) => {
     }) 
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Gemini API Error:", errorText);
-      return new Response(JSON.stringify({ error: `Gemini API Error: ${response.statusText}`, details: errorText }), { status: response.status, statusText: response.statusText })
+      const errorText = await response.text() 
+      console.error("Gemini API Error:", errorText) 
+      return new Response(JSON.stringify({ 
+        error: `Gemini API Error: ${response.statusText}`, 
+        details: errorText 
+      }), { 
+        status: response.status, 
+        statusText: response.statusText 
+      })
     }
 
     return new Response(response.body) 
   } catch (error: any) {
-    console.error("Server Error:", error);
+    console.error("Server Error:", error)
     return new Response(JSON.stringify({ error: error.message }), { status: 500 }) 
   }
 }
