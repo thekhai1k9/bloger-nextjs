@@ -1,4 +1,4 @@
-import { GithubIcon } from '@/components/Icon'
+import { GithubIcon } from '@/components/ui/Icon'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'

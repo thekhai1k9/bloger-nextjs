@@ -1,6 +1,6 @@
 'use client'
 
-import AnimationText from '@/components/AnimationText'
+import AnimationText from '@/components/animations/AnimationText'
 import Layout from '@/components/Layouts/Layout'
 import React, {useEffect, useRef} from 'react'
 import Image from 'next/image'
@@ -9,7 +9,7 @@ import {useInView, useMotionValue, useSpring} from 'framer-motion'
 import Skills from './Skills'
 import Experience from './Experience'
 import Education from './Education'
-import TransitionEffect from '@/components/TransitionEffect'
+import TransitionEffect from '@/components/animations/TransitionEffect'
 
 interface AnimatedNumberTextIProps {
   value: number

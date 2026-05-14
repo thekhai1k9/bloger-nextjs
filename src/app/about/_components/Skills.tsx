@@ -1,6 +1,6 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { CICDIcon, CSSICon, DockerIcon, ExpressJSIcon, GitHubIcon, GitIcon, GitlabIcon, GraphQLIcon, HTMLIcon, JestIcon, JSIcon, LinuxIcon, NextIcon, NodeIcon, PostgreSQLIcon, PythonIcon, ReactIcon, RedisIcon, ReduxIcon, TypeScriptIcon, VimIcon } from "../../../components/Icon"
+import { CICDIcon, CSSICon, DockerIcon, ExpressJSIcon, GitHubIcon, GitIcon, GitlabIcon, GraphQLIcon, HTMLIcon, JestIcon, JSIcon, LinuxIcon, NextIcon, NodeIcon, PostgreSQLIcon, PythonIcon, ReactIcon, RedisIcon, ReduxIcon, TypeScriptIcon, VimIcon } from "../../../components/ui/Icon"
 
 interface SkillIProps {
   children: React.ReactNode
