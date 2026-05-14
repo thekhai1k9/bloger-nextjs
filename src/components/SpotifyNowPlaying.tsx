@@ -10,7 +10,6 @@ export default function SpotifyNowPlaying() {
     const fetchNowPlaying = async () => {
       try {
         const res = await fetch('/api/spotify')
-        console.log("🚀 ~ fetchNowPlaying ~ res:", res)
         const json: SpotifyData = await res.json()
         setData(json)
       } catch (error) {

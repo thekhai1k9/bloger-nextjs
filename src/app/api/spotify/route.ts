@@ -24,7 +24,6 @@ export const GET = async () => {
     albumImageUrl: song.item.album.images[0]?.url || '', // Thêm optional chaining
     songUrl: song.item.external_urls.spotify
   }
-  console.log("data", data)
 
   return NextResponse.json(data)
 }
