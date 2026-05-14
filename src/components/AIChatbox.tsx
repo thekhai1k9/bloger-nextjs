@@ -95,13 +95,7 @@ export const AIChatBot = () => {
     setIsLoading(true)
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          messages: messages.concat(userMsg).map(m => ({ role: m.role, content: m.content })) 
-        }),
-      })
+      const response = await fetch('/api/chat')
 
       if (!response.ok) throw new Error('Network response was not ok')
       if (!response.body) throw new Error('No response body')

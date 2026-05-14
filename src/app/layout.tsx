@@ -7,7 +7,6 @@ import TanstackProvider from '@/components/Providers/TanstackProvider'
 import {AIChatBot} from '@/components/AIChatbox'
 import {Toaster} from 'react-hot-toast'
 import type {Metadata} from 'next'
-import SpotifyNowPlaying from '@/components/SpotifyNowPlaying'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -55,7 +54,6 @@ export default function RootLayout({
         </TanstackProvider>
         <AIChatBot />
         <div className="fixed bottom-4 left-4">
-          <SpotifyNowPlaying />
         </div>
       </body>
     </html>
