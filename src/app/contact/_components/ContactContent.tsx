@@ -1,6 +1,6 @@
 'use client'
 
-import TransitionEffect from '@/components/TransitionEffect'
+import TransitionEffect from '@/components/animations/TransitionEffect'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import FormContactSendMail from './FormContactSendMail'

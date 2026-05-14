@@ -1,12 +1,12 @@
 'use client'
 
-import { EmailIcon, FaceBookIcon, GithubIcon, GoogleICon, PasswordIcon } from '@/components/Icon'
+import { EmailIcon, FaceBookIcon, GithubIcon, GoogleICon, PasswordIcon } from '@/components/ui/Icon'
 import Layout from '@/components/Layouts/Layout'
-import TransitionEffect from '@/components/TransitionEffect'
+import TransitionEffect from '@/components/animations/TransitionEffect'
 import Link from 'next/link'
 import React from 'react'
 import { motion } from "framer-motion"
-import AnimationText from '@/components/AnimationText'
+import AnimationText from '@/components/animations/AnimationText'
 
 const SignUpContent = () => {
   return (

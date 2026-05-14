@@ -1,4 +1,4 @@
-import AnimationText from '@/components/AnimationText'
+import AnimationText from '@/components/animations/AnimationText'
 import Layout from '@/components/Layouts/Layout'
 import React from 'react'
 import FeaturedElements from './_components/FeaturedElement'
@@ -9,7 +9,7 @@ import project4 from "../../../public/images//projects/fashion-studio-website.jp
 import project5 from "../../../public/images//projects/nft-collection-website-cover-image.jpg"
 import project6 from "../../../public/images//projects/portfolio-cover-image.jpg"
 import Elements from './_components/Elements'
-import TransitionEffect from '@/components/TransitionEffect'
+import TransitionEffect from '@/components/animations/TransitionEffect'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

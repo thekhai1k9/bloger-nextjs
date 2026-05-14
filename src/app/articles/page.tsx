@@ -1,4 +1,4 @@
-import AnimationText from "@/components/AnimationText"
+import AnimationText from "@/components/animations/AnimationText"
 import Layout from "@/components/Layouts/Layout"
 import React from "react"
 import article1 from "../../../public/images/articles/What is Redux with easy explanation.png"
@@ -8,7 +8,7 @@ import article4 from "../../../public/images/articles/pagination component in re
 import article5 from "../../../public/images/articles/todo list app built using react redux and framer motion.png"
 import FeaturedArticle from "./_components/FeaturedArticle"
 import Articles from "./_components/Articles"
-import TransitionEffect from "@/components/TransitionEffect"
+import TransitionEffect from "@/components/animations/TransitionEffect"
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
