@@ -21,7 +21,14 @@ module.exports = {
         blueLink: "#2563eb"
       },
       animation: {
-        'spin-slow': 'spin 3s linear infinite'
+        'spin-slow': 'spin 3s linear infinite',
+        'marquee': 'marquee 25s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%':   { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-33.33%)' },
+        },
       },
       backgroundImage: {
         circularLight: "repeating-radial-gradient(rgba(0,0,0,0.4) 2px,#f5f5f5 5px,#f5f5f5 100px)",
