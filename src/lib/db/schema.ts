@@ -7,7 +7,6 @@ export const posts = pgTable("posts", {
   content: text("content").notNull(),
   coverImage: text("cover_image"),
   // Lưu ID người dùng từ Supabase Auth 
-  authorId: uuid("author_id").notNull(), 
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
