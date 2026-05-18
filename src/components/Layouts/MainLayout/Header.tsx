@@ -82,8 +82,7 @@ const Header = () => {
         <nav>
           <CustomLink href="/" title='Home' className='mr-4'/>
           <CustomLink href="/about" title='About' className='mx-4'/>
-          {/* <CustomLink href="/element" title='Element' className='mx-4'/> */}
-          {/* <CustomLink href="/articles" title='Articles' className='mx-4'/> */}
+          <CustomLink href="/articles" title='Articles' className='mx-4'/>
           <CustomLink href="/contact" title='Contact' className='ml-4'/>
         </nav>
         <nav className='flex items-center justify-center flex-wrap'>

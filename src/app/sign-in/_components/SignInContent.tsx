@@ -4,11 +4,47 @@ import { EmailIcon, FaceBookIcon, GithubIcon, GoogleICon, PasswordIcon } from '@
 import Layout from '@/components/Layouts/Layout'
 import TransitionEffect from '@/components/animations/TransitionEffect'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from "framer-motion"
 import AnimationText from '@/components/animations/AnimationText'
+import Input from '@/components/ui/Input'
+import ButtonSubmit from '@/components/ui/ButtonSubmit'
+import { createClient } from '@/lib/supabase/client'
+import { useRouter } from 'next/navigation'
 
 const SignInContent = () => {
+  const supabase = createClient()
+  const router = useRouter()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  console.log("🚀 ~ SignInContent ~ message:", message)
+
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setMessage('')
+
+    // 1. Gọi Supabase Auth để xác thực tài khoản
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) {
+      setMessage(error.message)
+      setLoading(false)
+      return
+    }
+
+    if (data?.user) {
+      router.push('/admin')
+      router.refresh() // load middleware nhận diện cookie session mới
+    }
+  }
+
   return (
     <React.Fragment>
       <TransitionEffect/>
@@ -35,37 +71,39 @@ const SignInContent = () => {
                   </motion.a>
                 </div>
                 <p className='text-dark/60 my-3 text-sm dark:!text-dark'>or use your email account</p>
+                {/* {message?.text && (
+                  <p className={`text-sm mb-4 font-semibold ${message.type === 'error' ? 'text-red-500' : 'text-green-500'}`}>
+                    {message.text}
+                  </p>
+                )} */}
                 
-                <form className='flex flex-col items-center'>
-                  <div className='bg-gray-200 p-2 flex items-center mb-3 rounded-3xl'> 
-                    <EmailIcon className='w-4 h-4 mr-3 sm:mx-1 dark:rounded-full'/>
-                    <input 
-                      type='text' 
-                      name='email' 
-                      placeholder='Email' 
-                      className='bg-gray-200 outline-none text-sm'
-                    />
-                  </div>
-                  <div className='bg-gray-200 p-2 flex items-center mb-3 rounded-3xl'> 
-                    <PasswordIcon className='w-4 h-4 mr-3 sm:mx-1 dark:rounded-full'/>
-                    <input 
-                      type='password' 
-                      name='password' 
-                      placeholder='Password' 
-                      className='bg-gray-200 outline-none text-sm'
-                    />
-                  </div>
+                <form onSubmit={handleSignIn} className='flex flex-col items-center'>
+                  <Input 
+                    type='text' 
+                    placeholder='Email' 
+                    value={email}
+                    onChange={(e: any) => setEmail(e.target.value)}
+                    icon={<EmailIcon className='w-4 h-4 mr-3 sm:mx-1 dark:rounded-full'/>}
+                    required
+                  />
+                  <Input 
+                    type='password' 
+                    placeholder='Password' 
+                    value={password}
+                    onChange={(e: any) => setPassword(e.target.value)}
+                    icon={ <PasswordIcon className='w-4 h-4 mr-3 sm:mx-1 dark:rounded-full'/>}
+                    required
+                  />
+                  
                   <div className='flex justify-center w-64 mb-5'>
                     <span className='flex items-center text-xs dark:text-dark'>
                       Dont not have an account?<Link href={'/sign-up'} className='text-xs text-blueLink ml-2 hover:text-blueLink/80 font-bold'>Sign up</Link>
                     </span>
                   </div>
-                  <button 
-                    type='submit'
-                    className='border-2 border-primary rounded-full px-12 py-2 inline-block font-semibold hover:bg-white/80 hover:text-primary dark:text-dark'
-                  >
+
+                  <ButtonSubmit type='submit' loading={loading}>
                     Sign In
-                  </button>
+                  </ButtonSubmit>
                 </form>
               </div>
             </div>
