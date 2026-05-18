@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 import { motion } from "framer-motion"
 import AnimationText from '@/components/animations/AnimationText'
 import Input from '@/components/ui/Input'
-import ButtonSubmit from '@/components/ui/ButtonSubmit'
+import Button from '@/components/ui/Button'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -101,9 +101,9 @@ const SignInContent = () => {
                     </span>
                   </div>
 
-                  <ButtonSubmit type='submit' loading={loading}>
+                  <Button variant="auth-submit" loading={loading}>
                     Sign In
-                  </ButtonSubmit>
+                  </Button>
                 </form>
               </div>
             </div>

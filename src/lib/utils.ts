@@ -1,1 +1,0 @@
-// Hàm format string, classNames merger

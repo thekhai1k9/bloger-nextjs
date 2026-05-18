@@ -3,7 +3,7 @@
 import Layout from '@/components/Layouts/Layout'
 import AnimationText from '@/components/animations/AnimationText'
 import TransitionEffect from '@/components/animations/TransitionEffect'
-import ButtonSubmit from '@/components/ui/ButtonSubmit'
+import Button from '@/components/ui/Button'
 import { EmailIcon, FaceBookIcon, GithubIcon, GoogleICon, PasswordIcon } from '@/components/ui/Icon'
 import Input from '@/components/ui/Input'
 import { createClient } from '@/lib/supabase/client'
@@ -118,9 +118,9 @@ const SignUpContent = () => {
                     </span>
                   </div>
 
-                  <ButtonSubmit type='submit' loading={loading}>
+                  <Button variant="auth-submit" loading={loading}>
                     Sign Up
-                  </ButtonSubmit>
+                  </Button>
                 </form>
 
               </div>
