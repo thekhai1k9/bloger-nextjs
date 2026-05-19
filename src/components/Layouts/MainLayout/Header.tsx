@@ -8,6 +8,8 @@ import { motion } from "framer-motion"
 import useThemeSwitcher from '@/hooks/useThemeSwitcher'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import HeaderAuth from '@/app/admin/_components/HeaderAuth'
+import { useOutsideClick } from '@/hooks/useOutsideClick'
 
 interface CustomLinkIProps {
   href: string,
@@ -59,13 +61,17 @@ const CustomMoblieLink: React.FC<CustomLinkMobileIProps> = ({ href, title, class
 
 
 const Header = () => {
-  const router = useRouter()
+  // const router = useRouter()
   const [mode, setMode] = useThemeSwitcher()
   const [isOpenModelResponsive, setIsOpenModelResponsive] = useState<boolean>(false)
 
   const handleClickOpenModalReponsive = () => {
     setIsOpenModelResponsive(!isOpenModelResponsive)
   }
+
+  const modalRef = useOutsideClick(() => {
+    if (isOpenModelResponsive) setIsOpenModelResponsive(false)
+  })
 
   return (
     <header className='w-full px-32 py-8 font-medium flex items-center justify-between dark:text-light relative z-10 lg:px-16 md:px-12 sm:px-8'>
@@ -140,9 +146,10 @@ const Header = () => {
 
           <div 
             className='ml-4 font-bold flex items-center justify-center cursor-pointer dark:hover:text-light/75 hover:text-dark/75 text-sm'
-            onClick={() => router.push('/sign-in')}
+            // onClick={() => router.push('/sign-in')}
           >
-            <span className='px-2'>Sign in</span>
+            {/* <span className='px-2'>Sign in</span> */}
+            <HeaderAuth />
           </div>
         </nav>
       </div>
@@ -153,12 +160,13 @@ const Header = () => {
             fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-dark/90 dark:bg-light/75 rounded-lg backdrop-blur-md py-32'
             initial={{scale: 0, opacity: 0, x: "-50%", y: "-50%"}}
             animate={{scale: 1, opacity: 1}}
+            ref={modalRef}
           >
             <nav className='flex items-center flex-col justify-center'>
               <CustomMoblieLink href="/" title='Home' className=''  toggle={handleClickOpenModalReponsive}/>
               <CustomMoblieLink href="/about" title='About' className='=' toggle={handleClickOpenModalReponsive} />
               {/* <CustomMoblieLink href="/element" title='Element' className='=' toggle={handleClickOpenModalReponsive}/> */}
-              {/* <CustomMoblieLink href="/articles" title='Articles' className='=' toggle={handleClickOpenModalReponsive}/> */}
+              <CustomMoblieLink href="/articles" title='Articles' className='=' toggle={handleClickOpenModalReponsive}/>
               <CustomMoblieLink href="/contact" title='Contact' className='' toggle={handleClickOpenModalReponsive}/>
             </nav>
             <nav className='flex items-center justify-center flex-wrap mt-2'>
@@ -214,6 +222,7 @@ const Header = () => {
                 { mode === "dark" ? <MoonIcon className="fill-dark"/> : <SunIcon className="fill-dark"/>}
               </button>
             </nav>
+            <HeaderAuth isMobile={true} toggleMobileMenu={handleClickOpenModalReponsive} />
           </motion.div>
         )
       }

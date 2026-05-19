@@ -31,6 +31,7 @@ const SignUpContent = () => {
       password,
       options: {
         data: {
+          role: 'user',
           full_name: name, // Lưu thêm tên vào metadata của Auth user
         },
       },
