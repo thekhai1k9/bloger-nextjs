@@ -160,5 +160,6 @@ export function useAdminLogic() {
     handleDelete,
     handleUploadCoverImage,
     handleEditorChange,
+    fetchPosts
   }
 }
