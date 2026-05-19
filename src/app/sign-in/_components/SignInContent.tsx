@@ -17,6 +17,7 @@ import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 import {createClient} from '@/lib/supabase/client'
 import {useRouter} from 'next/navigation'
+import toast from 'react-hot-toast'
 
 const SignInContent = () => {
   const supabase = createClient()
@@ -25,12 +26,10 @@ const SignInContent = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setMessage('')
 
     // 1. Gọi Supabase Auth để xác thực tài khoản
     const {data, error} = await supabase.auth.signInWithPassword({
@@ -39,13 +38,13 @@ const SignInContent = () => {
     })
 
     if (error) {
-      setMessage(error.message)
+      toast.error(error.message)
       setLoading(false)
       return
     }
 
     if (data?.user) {
-      const {data: dbUser, error: dbError} = await supabase
+      const {data: dbUser} = await supabase
         .from('users')
         .select('role')
         .eq('id', data.user.id)
@@ -107,11 +106,6 @@ const SignInContent = () => {
                 <p className="text-dark/60 my-3 text-sm dark:!text-dark">
                   or use your email account
                 </p>
-                {/* {message?.text && (
-                  <p className={`text-sm mb-4 font-semibold ${message.type === 'error' ? 'text-red-500' : 'text-green-500'}`}>
-                    {message.text}
-                  </p>
-                )} */}
 
                 <form
                   onSubmit={handleSignIn}

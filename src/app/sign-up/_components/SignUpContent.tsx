@@ -10,6 +10,7 @@ import { createClient } from '@/lib/supabase/client'
 import { motion } from "framer-motion"
 import Link from 'next/link'
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 
 const SignUpContent = () => {
   const supabase = createClient()
@@ -18,12 +19,10 @@ const SignUpContent = () => {
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState({type: '', text: ''})
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setMessage({type: '', text: ''})
 
     // 1. Gọi Supabase Auth để đăng ký tài khoản
     const { data, error } = await supabase.auth.signUp({
@@ -40,15 +39,12 @@ const SignUpContent = () => {
     setLoading(false)
 
     if (error) {
-      setMessage({type: 'error', text: error.message})
+      toast.error(error.message)
       return
     }
 
     if (data?.user) {
-      setMessage({
-        type: 'success',
-        text: 'Đăng ký thành công! Hãy kiểm tra hộp thư email để kích hoạt tài khoản.',
-      })
+      toast.success('Đăng ký thành công! Hãy kiểm tra hộp thư email để kích hoạt tài khoản.')
       // Clear form
       setEmail('')
       setPassword('')
@@ -78,12 +74,6 @@ const SignUpContent = () => {
                   <motion.a href={'#'} whileHover={{y: -2}} className='border-2 border-light/70 rounded-full mx-3 dark:border-transparent dark:p-0 dark:rounded-full dark:bg-dark'><GithubIcon className='!w-[32px]'/></motion.a>
                 </div>
                 <p className='text-dark/60 my-3 text-sm dark:!text-dark'>or use your email account</p>
-                
-                {message.text && (
-                  <p className={`text-sm mb-4 font-semibold ${message.type === 'error' ? 'text-red-500' : 'text-green-500'}`}>
-                    {message.text}
-                  </p>
-                )}
                 
                 <form onSubmit={handleSignUp} className='flex flex-col items-center'>
                   <Input 
