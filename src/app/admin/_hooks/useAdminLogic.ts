@@ -24,7 +24,7 @@ export function useAdminLogic() {
 
   const supabase = createClient()
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async() => {
     setLoading(true)
     const {data, error} = await supabase
       .from('posts')
@@ -35,11 +35,11 @@ export function useAdminLogic() {
       setFilteredPosts(data)
     }
     setLoading(false)
-  }
+  },[])
 
   useEffect(() => {
     fetchPosts()
-  }, [])
+  }, [fetchPosts])
 
   useEffect(() => {
     const result = posts.filter((post) =>
