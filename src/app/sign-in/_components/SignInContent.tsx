@@ -1,5 +1,14 @@
 'use client'
 
+import React from 'react'
+import {useForm} from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import {motion} from 'framer-motion'
+import Link from 'next/link'
+import {useRouter} from 'next/navigation'
+import toast from 'react-hot-toast'
+
 import {
   EmailIcon,
   FaceBookIcon,
@@ -9,37 +18,47 @@ import {
 } from '@/components/ui/Icon'
 import Layout from '@/components/Layouts/Layout'
 import TransitionEffect from '@/components/animations/TransitionEffect'
-import Link from 'next/link'
-import React, {useState} from 'react'
-import {motion} from 'framer-motion'
 import AnimationText from '@/components/animations/AnimationText'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 import {createClient} from '@/lib/supabase/client'
-import {useRouter} from 'next/navigation'
-import toast from 'react-hot-toast'
+
+const signInSchema = z.object({
+  email: z
+    .string()
+    .min(1, 'Vui lòng nhập Email')
+    .email('Email không đúng định dạng'),
+  password: z.string().min(6, 'Mật khẩu phải từ 6 ký tự trở lên'),
+})
+
+type SignInInput = z.infer<typeof signInSchema>
 
 const SignInContent = () => {
   const supabase = createClient()
   const router = useRouter()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    formState: {errors, isSubmitting},
+  } = useForm<SignInInput>({
+    resolver: zodResolver(signInSchema),
+    mode: 'onTouched',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
 
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-
+  const onSubmit = async (values: SignInInput) => {
     // 1. Gọi Supabase Auth để xác thực tài khoản
     const {data, error} = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: values.email,
+      password: values.password,
     })
 
     if (error) {
       toast.error(error.message)
-      setLoading(false)
       return
     }
 
@@ -51,6 +70,7 @@ const SignInContent = () => {
         .single()
 
       const role = dbUser?.role || 'user'
+
       if (role === 'admin') {
         router.push('/admin')
       } else {
@@ -108,29 +128,36 @@ const SignInContent = () => {
                 </p>
 
                 <form
-                  onSubmit={handleSignIn}
-                  className="flex flex-col items-center"
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col items-center w-full"
                 >
-                  <Input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e: any) => setEmail(e.target.value)}
-                    icon={
-                      <EmailIcon className="w-4 h-4 mr-3 sm:mx-1 dark:rounded-full" />
-                    }
-                    required
-                  />
-                  <Input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e: any) => setPassword(e.target.value)}
-                    icon={
-                      <PasswordIcon className="w-4 h-4 mr-3 sm:mx-1 dark:rounded-full" />
-                    }
-                    required
-                  />
+                  {/* Ô Nhập Email */}
+                  <div className="w-64 mb-3 text-left">
+                    <Input
+                      variant="auth"
+                      type="text"
+                      placeholder="Email"
+                      {...register('email')}
+                      icon={
+                        <EmailIcon className="w-4 h-4 mr-3 sm:mx-1 dark:rounded-full" />
+                      }
+                      error={errors.email?.message}
+                    />
+                  </div>
+
+                  {/* Ô Nhập Password */}
+                  <div className="w-64 mb-3 text-left">
+                    <Input
+                      variant="auth"
+                      type="password"
+                      placeholder="Password"
+                      {...register('password')} 
+                      icon={
+                        <PasswordIcon className="w-4 h-4 mr-3 sm:mx-1 dark:rounded-full" />
+                      }
+                      error={errors.password?.message}
+                    />
+                  </div>
 
                   <div className="flex justify-center w-64 mb-5">
                     <span className="flex items-center text-xs dark:text-dark">
@@ -144,7 +171,7 @@ const SignInContent = () => {
                     </span>
                   </div>
 
-                  <Button variant="auth-submit" loading={loading}>
+                  <Button variant="auth-submit" loading={isSubmitting}>
                     Sign In
                   </Button>
                 </form>
