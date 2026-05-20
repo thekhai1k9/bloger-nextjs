@@ -5,14 +5,27 @@ import rehypePrettyCode from 'rehype-pretty-code'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'mdx'],
-  // Nếu sau này bạn có thêm config khác (ví dụ: images, redirects...) thì viết vào đây
+
+  // Thêm cấu hình images vào đây khi cần
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'atwxvuurcklsgoytdgkc.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
+  },
 }
 
-const withMDX = createMDX({
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [[rehypePrettyCode, {theme: 'github-dark'}]],
-  },
-})
+export default nextConfig
 
-export default withMDX(nextConfig)
+// const withMDX = createMDX({
+//   options: {
+//     remarkPlugins: [remarkGfm],
+//     rehypePlugins: [[rehypePrettyCode, {theme: 'github-dark'}]],
+//   },
+// })
+
+// export default withMDX(nextConfig)
