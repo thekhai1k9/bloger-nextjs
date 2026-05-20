@@ -11,3 +11,15 @@ export const generateSlug = (title: string): string => {
     .trim()
     .replace(/\s+/g, '-') // Thay thế khoảng trắng thành dấu gạch ngang
 }
+
+export const generateSlugPageAdmin = (title: string): string => {
+  return title
+    .toLowerCase()
+    .substring(0, 150)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
+

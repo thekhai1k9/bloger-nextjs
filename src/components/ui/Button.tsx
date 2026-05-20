@@ -20,7 +20,7 @@ export default function Button({
 
   const variants = {
     'admin-primary':
-      'w-fit bg-[#8b5cf6] hover:bg-[#7c3aed] text-white px-5 py-2.5 rounded-xl shadow-sm text-xs sm:text-sm',
+      'w-fit bg-primary hover:bg-[#db2777c2] text-white px-5 py-2.5 rounded-xl shadow-sm text-xs sm:text-sm',
     'auth-submit':
       'border-2 border-primary bg-primary text-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-primary transition-all duration-200 dark:text-dark disabled:bg-gray-300 disabled:border-gray-300 disabled:cursor-not-allowed',
     secondary:
