@@ -1,11 +1,12 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Search, Image as ImageIcon, Trash2, Edit3 } from 'lucide-react'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import { useAdminLogic } from '../_hooks/useAdminLogic'
 import TransitionEffect from '@/components/animations/TransitionEffect'
+import Modal from '@/components/ui/Modal'
 
 export default function AdminContent() {
   const {
@@ -15,9 +16,24 @@ export default function AdminContent() {
     setSearchText,
     currentPage,
     setCurrentPage,
+    isDeleteOpen,
+    setIsDeleteOpen,
     totalPages,
     handleDelete
   } = useAdminLogic()
+
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null)
+
+  const openDeleteConfirm = (id: string) => {
+    setSelectedPostId(id) 
+    setIsDeleteOpen(true)
+  }
+
+  const confirmDelete = async () => {
+    if (!selectedPostId) return
+    await handleDelete(selectedPostId)
+    setSelectedPostId(null) 
+  }
 
   return (
     <React.Fragment>
@@ -31,9 +47,8 @@ export default function AdminContent() {
               <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">KP Management</h1>
               <p className="text-gray-500 text-xs sm:text-sm mt-1">Hệ thống quản trị và biên soạn nội dung Blog bài viết.</p>
             </div>
-            {/* 👉 BẤM VÀO ĐÂY ĐỂ SANG TRANG MỚI */}
             <Link href="/admin/new-post" className="w-full sm:w-auto">
-              <Button className="w-full px-6 py-3">+ Viết bài mới</Button>
+              <Button className="px-6 py-3">+ Viết bài mới</Button>
             </Link>
           </div>
 
@@ -44,7 +59,7 @@ export default function AdminContent() {
               placeholder="Tìm kiếm bài viết theo tiêu đề..."
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]"
+              className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <Search className="absolute left-4 top-3.5 sm:top-4 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
           </div>
@@ -80,11 +95,16 @@ export default function AdminContent() {
                         <td className="p-4 text-gray-500 text-xs sm:text-sm">{new Date(post.created_at).toLocaleDateString('vi-VN')}</td>
                         <td className="p-4 text-center">
                           <div className="flex justify-center gap-2">
-                            
                             <Link href={`/admin/edit-post/${post.id}`} className="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition">
                               <Edit3 className="w-4 h-4"/>
                             </Link>
-                            <button onClick={() => handleDelete(post.id)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition"><Trash2 className="w-4 h-4"/></button>
+                            
+                            <button 
+                              onClick={() => openDeleteConfirm(post.id)} 
+                              className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition"
+                            >
+                              <Trash2 className="w-4 h-4"/>
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -107,6 +127,17 @@ export default function AdminContent() {
           </div>
         </div>
       </div>
+      
+      {/* 💡 MODAL ĐÃ ĐƯỢC FIX LỖI SCOPE BIẾN */}
+      <Modal isOpen={isDeleteOpen} onClose={() => { setIsDeleteOpen(false); setSelectedPostId(null); }} title="Xác nhận xóa">
+        <div className="space-y-4">
+          <p className="text-sm text-gray-500">Bạn có chắc chắn muốn xóa vĩnh viễn bài viết này không? Hành động này không thể hoàn tác.</p>
+          <div className="flex justify-end gap-3 pt-2">
+            <Button variant="secondary" onClick={() => { setIsDeleteOpen(false); setSelectedPostId(null); }}>Hủy</Button>
+            <Button className="bg-primary hover:[#db2777c2] text-white" onClick={confirmDelete}>Xác nhận xóa</Button>
+          </div>
+        </div>
+      </Modal>
     </React.Fragment>
   )
 }
