@@ -128,7 +128,7 @@ export default function AdminContent() {
         </div>
       </div>
       
-      {/* 💡 MODAL ĐÃ ĐƯỢC FIX LỖI SCOPE BIẾN */}
+      {/* 💡 MODAL */}
       <Modal isOpen={isDeleteOpen} onClose={() => { setIsDeleteOpen(false); setSelectedPostId(null); }} title="Xác nhận xóa">
         <div className="space-y-4">
           <p className="text-sm text-gray-500">Bạn có chắc chắn muốn xóa vĩnh viễn bài viết này không? Hành động này không thể hoàn tác.</p>
