@@ -13,6 +13,7 @@ export default function AdminContent() {
   const {
     paginatedPosts,
     loading,
+    totalCount,
     searchText,
     setSearchText,
     currentPage,
@@ -22,8 +23,6 @@ export default function AdminContent() {
     totalPages,
     handleDelete
   } = useAdminLogic()
-
-  console.log("props", {paginatedPosts: paginatedPosts, searchText: searchText, currentPage: currentPage})
 
   const [selectedPost, setSelectedPost] = useState<Post | null>(null)
 
@@ -88,7 +87,7 @@ export default function AdminContent() {
                       <tr key={post.id} className="hover:bg-gray-50/50 transition">
                         <td className="p-4 pl-6 flex items-center gap-4 max-w-sm sm:max-w-md">
                           <div className="w-14 h-9 sm:w-16 sm:h-10 rounded-lg bg-gray-50 border overflow-hidden flex-shrink-0 flex items-center justify-center">
-                            {post.cover_image ? <img src={post.cover_image} className="w-full h-full object-cover" /> : <ImageIcon className="text-gray-300 w-4 h-4" />}
+                            {post.cover_image ? <img src={post.cover_image} alt="" className="w-full h-full object-cover" /> : <ImageIcon className="text-gray-300 w-4 h-4" />}
                           </div>
                           <div className="truncate">
                             <p className="font-semibold text-gray-800 truncate text-sm sm:text-base">{post.title}</p>
@@ -122,6 +121,11 @@ export default function AdminContent() {
               <div className="flex items-center justify-between p-4 bg-white border-t border-gray-50">
                 <span className="text-xs sm:text-sm text-gray-500">Trang {currentPage} / {totalPages}</span>
                 <div className="flex gap-2">
+                  <div className='text-xs sm:text-sm font-medium px-3 py-1.5'>
+                    {totalCount > 0 && (
+                      <span className="ml-1">Tổng số {totalCount} bài viết</span>
+                    )}
+                  </div>
                   <button disabled={currentPage === 1} onClick={() => setCurrentPage((p: any) => p - 1)} className="px-3 py-1.5 border rounded-lg text-xs sm:text-sm font-medium disabled:opacity-40 hover:bg-gray-50 transition">Trước</button>
                   <button disabled={currentPage === totalPages} onClick={() => setCurrentPage((p: any) => p + 1)} className="px-3 py-1.5 border rounded-lg text-xs sm:text-sm font-medium disabled:opacity-40 hover:bg-gray-50 transition">Sau</button>
                 </div>
@@ -136,7 +140,7 @@ export default function AdminContent() {
         <div className="space-y-4">
           <p className="text-sm text-gray-500">
             Bạn có chắc chắn muốn xóa vĩnh viễn bài viết 
-            <strong className="text-gray-900"> "{selectedPost?.title}"</strong> không? 
+            <strong className="text-gray-900">{selectedPost?.title}</strong> không? 
             Hành động này không thể hoàn tác.
           </p>
           <div className="flex justify-end gap-3 pt-2">

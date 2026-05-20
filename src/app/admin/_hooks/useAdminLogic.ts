@@ -7,63 +7,76 @@ import toast from 'react-hot-toast'
 import { extractStoragePaths } from '@/helpers/utils'
 
 export function useAdminLogic() {
-  const [posts, setPosts] = useState<Post[]>([])
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>([])
+  const [posts, setPosts] = useState<Omit<Post, 'content'>[]>([])
   const [loading, setLoading] = useState(true)
+
   const [searchText, setSearchText] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
   
   const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false)
-
   const [currentPage, setCurrentPage] = useState(1)
+  const [totalCount, setTotalCount] = useState(0) 
   const pageSize = 5
 
   const supabase = createClient()
 
-  // fetch danh sách bài viết từ database
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchText)
+      setCurrentPage(1) 
+    }, 500)
+
+    return () => clearTimeout(handler)
+  }, [searchText])
+
   const fetchPosts = useCallback(async () => {
     setLoading(true)
     try {
-      const { data, error } = await supabase
+      const from = (currentPage - 1) * pageSize
+      const to = from + pageSize - 1
+
+      let query = supabase
         .from('posts')
-        .select('*')
+        .select('id, title, slug, cover_image, created_at', { count: 'exact' })
         .order('created_at', { ascending: false })
+        .range(from, to) 
+
+      if (debouncedSearch.trim()) {
+        query = query.ilike('title', `%${debouncedSearch.trim()}%`)
+      }
+
+      const { data, error, count } = await query
 
       if (error) throw error
 
-      if (data) {
-        setPosts(data)
-        setFilteredPosts(data)
-      }
+      setPosts(data || [])
+      setTotalCount(count || 0)
     } catch (error: any) {
       toast.error('Lỗi khi lấy danh sách bài viết: ' + error.message)
     } finally {
       setLoading(false)
     }
-  }, [supabase])
+  }, [supabase, currentPage, debouncedSearch])
 
   useEffect(() => {
     fetchPosts()
   }, [fetchPosts])
 
-  useEffect(() => {
-    const result = posts.filter((post) =>
-      post.title?.toLowerCase().includes(searchText.toLowerCase())
-    )
-    setFilteredPosts(result)
-    setCurrentPage(1) 
-  }, [searchText, posts])
+  const totalPages = Math.ceil(totalCount / pageSize)
 
-  const paginatedPosts = filteredPosts.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
-  )
-  const totalPages = Math.ceil(filteredPosts.length / pageSize)
-
-  
   // ============= HANDLE DELETE =================
   const handleDelete = async (post: Post) => {
     try {
-      const filesToDelete = extractStoragePaths(post.content || '', post.cover_image || null)
+      const { data: detailPost } = await supabase
+        .from('posts')
+        .select('content, cover_image')
+        .eq('id', post.id)
+        .single()
+
+      const filesToDelete = extractStoragePaths(
+        detailPost?.content || '', 
+        detailPost?.cover_image || null
+      )
 
       const { error: dbError } = await supabase
         .from('posts')
@@ -72,7 +85,6 @@ export function useAdminLogic() {
 
       if (dbError) throw dbError
 
-      // dọn dẹp Storage 
       if (filesToDelete.length > 0) {
         const { error: storageError } = await supabase.storage
           .from('blog_images')
@@ -83,9 +95,13 @@ export function useAdminLogic() {
         }
       }
 
-      toast.success('Xóa bài viết và toàn bộ hình ảnh thành công!')
-      await fetchPosts()
-      // setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id))
+      toast.success('Xóa bài viết thành công!')
+      
+      if (posts.length === 1 && currentPage > 1) {
+        setCurrentPage((prev) => prev - 1)
+      } else {
+        await fetchPosts()
+      }
     } catch (error: any) {
       toast.error('Xóa thất bại: ' + error.message)
     } finally {
@@ -94,7 +110,7 @@ export function useAdminLogic() {
   }
 
   return {
-    paginatedPosts,
+    paginatedPosts: posts, 
     loading,
     searchText,
     setSearchText,
@@ -104,6 +120,7 @@ export function useAdminLogic() {
     isDeleteOpen,
     setIsDeleteOpen,
     handleDelete,
-    fetchPosts
+    fetchPosts,
+    totalCount
   }
 }

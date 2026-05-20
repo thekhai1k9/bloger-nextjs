@@ -1,17 +1,17 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Image as ImageIcon, Loader2, ArrowLeft } from 'lucide-react'
-import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
-import toast from 'react-hot-toast'
+import Input from '@/components/ui/Input'
+import { generateSlugPageAdmin } from '@/helpers/utils'
 import { createClient } from '@/lib/supabase/client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ArrowLeft, Image as ImageIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import * as z from 'zod'
 import BlogEditor from '../_components/BlogEditor'
-import { generateSlugPageAdmin } from '@/helpers/utils' 
 
 const postSchema = z.object({
   title: z.string().min(5, 'Tiêu đề bài viết phải có ít nhất 5 ký tự'),
