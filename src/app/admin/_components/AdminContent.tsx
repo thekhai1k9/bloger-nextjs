@@ -7,6 +7,7 @@ import Button from '@/components/ui/Button'
 import { useAdminLogic } from '../_hooks/useAdminLogic'
 import TransitionEffect from '@/components/animations/TransitionEffect'
 import Modal from '@/components/ui/Modal'
+import { Post } from '@/types/admin'
 
 export default function AdminContent() {
   const {
@@ -22,19 +23,21 @@ export default function AdminContent() {
     handleDelete
   } = useAdminLogic()
 
-  const [selectedPostId, setSelectedPostId] = useState<string | null>(null)
+  console.log("props", {paginatedPosts: paginatedPosts, searchText: searchText, currentPage: currentPage})
 
-  const openDeleteConfirm = (id: string) => {
-    setSelectedPostId(id) 
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null)
+
+  const openDeleteConfirm = (post: Post) => {
+    setSelectedPost(post) 
     setIsDeleteOpen(true)
   }
 
   const confirmDelete = async () => {
-    if (!selectedPostId) return
-    await handleDelete(selectedPostId)
-    setSelectedPostId(null) 
+    if (!selectedPost) return
+    await handleDelete(selectedPost)
+    setSelectedPost(null) 
   }
-
+  
   return (
     <React.Fragment>
       <TransitionEffect/>
@@ -100,7 +103,7 @@ export default function AdminContent() {
                             </Link>
                             
                             <button 
-                              onClick={() => openDeleteConfirm(post.id)} 
+                              onClick={() => openDeleteConfirm(post)} 
                               className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition"
                             >
                               <Trash2 className="w-4 h-4"/>
@@ -129,11 +132,15 @@ export default function AdminContent() {
       </div>
       
       {/* 💡 MODAL */}
-      <Modal isOpen={isDeleteOpen} onClose={() => { setIsDeleteOpen(false); setSelectedPostId(null); }} title="Xác nhận xóa">
+      <Modal isOpen={isDeleteOpen} onClose={() => { setIsDeleteOpen(false); setSelectedPost(null); }} title="Xác nhận xóa">
         <div className="space-y-4">
-          <p className="text-sm text-gray-500">Bạn có chắc chắn muốn xóa vĩnh viễn bài viết này không? Hành động này không thể hoàn tác.</p>
+          <p className="text-sm text-gray-500">
+            Bạn có chắc chắn muốn xóa vĩnh viễn bài viết 
+            <strong className="text-gray-900"> "{selectedPost?.title}"</strong> không? 
+            Hành động này không thể hoàn tác.
+          </p>
           <div className="flex justify-end gap-3 pt-2">
-            <Button variant="secondary" onClick={() => { setIsDeleteOpen(false); setSelectedPostId(null); }}>Hủy</Button>
+            <Button variant="secondary" onClick={() => { setIsDeleteOpen(false); setSelectedPost(null); }}>Hủy</Button>
             <Button className="bg-primary hover:[#db2777c2] text-white" onClick={confirmDelete}>Xác nhận xóa</Button>
           </div>
         </div>

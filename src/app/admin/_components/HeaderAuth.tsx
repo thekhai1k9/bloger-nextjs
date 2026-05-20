@@ -73,7 +73,7 @@ export default function HeaderAuth({ isMobile = false, toggleMobileMenu }: Heade
           {user.user_metadata?.full_name || user.email?.split('@')[0]}
         </span>
         {/* Nếu email là admin thì hiển thị thêm lối tắt truy cập nhanh */}
-        {user.email === 'thekhai1k9@gmail.com' && (
+        {user.email === process.env.ADMIN_INFO && (
           <button 
             onClick={() => {
               if (toggleMobileMenu) toggleMobileMenu()
