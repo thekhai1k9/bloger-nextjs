@@ -48,3 +48,60 @@ src/
 │   └── utils.ts                # Các hàm bổ trợ (generateSlug, format Date,...)
 └── lib/
     └── supabase/               # Cấu hình kết nối Supabase Client/Server
+
+```
+### 🚀 Khởi Chạy Dự Án (Getting Started)
+
+### 1. Sao chép mã nguồn (Clone Repository)
+```bash
+git clone https://github.com/your-username/kp-management.git
+cd kp-management
+
+```
+### 2. Cấu hình biến môi trường (Environment Variables)
+ Tạo file .env.local nằm ở thư mục gốc của dự án và điền các thông tin kết nối Supabase của bạn:
+``` Đoạn mã: 
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_public_key
+
+```
+### 3. Cài đặt các gói phụ thuộc (Dependencies)
+```Bash
+npm install
+# hoặc
+yarn install
+# hoặc
+pnpm install
+
+```
+### 4. Chạy môi trường Development
+``` Bash
+npm run dev
+# hoặc
+yarn dev
+
+```
+# =>  Mở trình duyệt và truy cập http://localhost:3000 để trải nghiệm hệ thống
+
+
+## 🔒 Cơ Chế Bảo Mật & Phân Quyền (Security Policies)
+
+Để bảo vệ toàn vẹn dữ liệu hệ thống khỏi các request can thiệp lậu từ bên ngoài, dự án triển khai bộ quy tắc **Row Level Security (RLS)** ngay trên Supabase Postgres:
+
+```sql
+-- Cho phép tất cả mọi người đọc danh sách bài viết công khai
+ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public read access" ON posts FOR SELECT USING (true);
+
+-- Chỉ những tài khoản có trường role = 'admin' trong bảng users mới có quyền Thêm, Sửa, Xóa
+CREATE POLICY "Allow admin write access" ON posts 
+FOR ALL USING (
+  EXISTS (
+    SELECT 1 FROM users 
+    WHERE users.id = auth.uid() AND users.role = 'admin'
+  )
+);
+
+```
+### 📄 License
+Dự án được bảo hộ bởi bản quyền MIT License. Bạn có thể tự do chỉnh sửa và sử dụng cho mục đích cá nhân lẫn thương mại.
