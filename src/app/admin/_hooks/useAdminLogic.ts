@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Post } from '@/types/admin'
 import toast from 'react-hot-toast'
+import { extractStoragePaths } from '@/helpers/utils'
 
 export function useAdminLogic() {
   const [posts, setPosts] = useState<Post[]>([])
@@ -58,18 +59,33 @@ export function useAdminLogic() {
   )
   const totalPages = Math.ceil(filteredPosts.length / pageSize)
 
-  const handleDelete = async (id: string) => {
+  
+  // ============= HANDLE DELETE =================
+  const handleDelete = async (post: Post) => {
     try {
-      const { error } = await supabase
+      const filesToDelete = extractStoragePaths(post.content || '', post.cover_image || null)
+
+      const { error: dbError } = await supabase
         .from('posts')
         .delete()
-        .eq('id', id)
+        .eq('id', post.id)
 
-      if (error) throw error
+      if (dbError) throw dbError
 
-      toast.success('Xóa bài viết thành công!')
-      
+      // dọn dẹp Storage 
+      if (filesToDelete.length > 0) {
+        const { error: storageError } = await supabase.storage
+          .from('blog_images')
+          .remove(filesToDelete)
+        
+        if (storageError) {
+          console.error('Lỗi dọn dẹp Storage:', storageError.message)
+        }
+      }
+
+      toast.success('Xóa bài viết và toàn bộ hình ảnh thành công!')
       await fetchPosts()
+      // setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id))
     } catch (error: any) {
       toast.error('Xóa thất bại: ' + error.message)
     } finally {

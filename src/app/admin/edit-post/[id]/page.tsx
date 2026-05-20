@@ -11,7 +11,7 @@ import Button from '@/components/ui/Button'
 import toast from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
 import BlogEditor from '../../_components/BlogEditor'
-import { generateSlugPageAdmin } from '@/helpers/utils'
+import { extractStoragePaths, generateSlugPageAdmin } from '@/helpers/utils'
 
 const postSchema = z.object({
   title: z.string().min(5, 'Tiêu đề bài viết phải có ít nhất 5 ký tự'),
@@ -103,17 +103,26 @@ export default function EditPostPage({ params }: EditPostPageProps) {
   // Handle Submit
   const onSubmit = async (values: PostFormValues) => {
     try {
+      // Get chi tiết xem có n~ ảnh nào
+      const { data: currentPostOnDB } = await supabase
+        .from('posts')
+        .select('content')
+        .eq('id', id)
+        .single()
+
+      const oldImagesInContent = extractStoragePaths(currentPostOnDB?.content || '', null)
+      const newImagesInContent = extractStoragePaths(values.content || '', null)
+      const contentImagesToDelete = oldImagesInContent.filter( (path) => !newImagesInContent.includes(path))
+
       let finalCoverUrl = originalCoverUrl
+      const coverImagesToDelete: string[] = []
+
       if (selectedFile) {
-        // Dọn dẹp, xóa tấm ảnh cũ
         if (originalCoverUrl) {
           const oldPath = getStoragePathFromUrl(originalCoverUrl)
-          if (oldPath) {
-            await supabase.storage.from('blog_images').remove([oldPath])
-          }
+          if (oldPath) coverImagesToDelete.push(oldPath)
         }
 
-        // Đẩy ảnh mới lên hệ thống
         const fileExt = selectedFile.name.split('.').pop()
         const fileName = `covers/${crypto.randomUUID()}.${fileExt}`
         
@@ -123,20 +132,31 @@ export default function EditPostPage({ params }: EditPostPageProps) {
 
         if (uploadError) throw uploadError
 
+        // Lấy public URL
         const { data } = supabase.storage.from('blog_images').getPublicUrl(fileName)
         finalCoverUrl = data.publicUrl
       } else if (values.cover_image === null && originalCoverUrl) {
-        // Người dùng "Xóa" ảnh 
         const oldPath = getStoragePathFromUrl(originalCoverUrl)
-        if (oldPath) {
-          await supabase.storage.from('blog_images').remove([oldPath])
-        }
+        if (oldPath) coverImagesToDelete.push(oldPath)
         finalCoverUrl = null
       }
 
-      // Đồng bộ cập nhật bản ghi dữ liệu
+      const allFilesToDelete = [...coverImagesToDelete, ...contentImagesToDelete]
+
+      if (allFilesToDelete.length > 0) {
+        const { error: storageError } = await supabase.storage
+          .from('blog_images')
+          .remove(allFilesToDelete)
+
+        if (storageError) {
+          console.error('Lỗi trong quá trình dọn dẹp Storage:', storageError.message)
+        } else {
+          console.log('Dọn dẹp tài nguyên ảnh thừa thành công!')
+        }
+      }
+
       const slug = generateSlugPageAdmin(values.title)
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('posts')
         .update({
           title: values.title,

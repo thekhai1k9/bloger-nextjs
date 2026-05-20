@@ -80,13 +80,16 @@ export default function NewPostPage() {
       const slug = generateSlugPageAdmin(values.title)
 
       // Lưu dữ liệu
-      const { error } = await supabase.from('posts').insert({
-        title: values.title,
-        cover_image: finalCoverUrl,
-        content: values.content,
-        slug,
-        created_at: new Date().toISOString(),
-      })
+      const { error } = await supabase
+        .from('posts')
+        .insert({
+          title: values.title,
+          cover_image: finalCoverUrl,
+          content: values.content,
+          slug,
+          created_at: new Date().toISOString(),
+        })
+        .select('*')
 
       if (error) throw error
 
