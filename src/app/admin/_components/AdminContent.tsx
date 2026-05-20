@@ -8,6 +8,7 @@ import { useAdminLogic } from '../_hooks/useAdminLogic'
 import TransitionEffect from '@/components/animations/TransitionEffect'
 import Modal from '@/components/ui/Modal'
 import { Post } from '@/types/admin'
+import Image from 'next/image'
 
 export default function AdminContent() {
   const {
@@ -88,7 +89,7 @@ export default function AdminContent() {
                       <tr key={post.id} className="hover:bg-gray-50/50 transition">
                         <td className="p-4 pl-6 flex items-center gap-4 max-w-sm sm:max-w-md">
                           <div className="w-14 h-9 sm:w-16 sm:h-10 rounded-lg bg-gray-50 border overflow-hidden flex-shrink-0 flex items-center justify-center">
-                            {post.cover_image ? <img src={post.cover_image} className="w-full h-full object-cover" /> : <ImageIcon className="text-gray-300 w-4 h-4" />}
+                            {post.cover_image ? <Image src={post.cover_image} alt="" className="w-full h-full object-cover" /> : <ImageIcon className="text-gray-300 w-4 h-4" />}
                           </div>
                           <div className="truncate">
                             <p className="font-semibold text-gray-800 truncate text-sm sm:text-base">{post.title}</p>
@@ -136,7 +137,7 @@ export default function AdminContent() {
         <div className="space-y-4">
           <p className="text-sm text-gray-500">
             Bạn có chắc chắn muốn xóa vĩnh viễn bài viết 
-            <strong className="text-gray-900"> "{selectedPost?.title}"</strong> không? 
+            <strong className="text-gray-900">{selectedPost?.title}</strong> không? 
             Hành động này không thể hoàn tác.
           </p>
           <div className="flex justify-end gap-3 pt-2">

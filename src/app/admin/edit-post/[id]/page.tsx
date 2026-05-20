@@ -12,6 +12,7 @@ import toast from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
 import BlogEditor from '../../_components/BlogEditor'
 import { extractStoragePaths, generateSlugPageAdmin } from '@/helpers/utils'
+import Image from 'next/image'
 
 const postSchema = z.object({
   title: z.string().min(5, 'Tiêu đề bài viết phải có ít nhất 5 ký tự'),
@@ -227,7 +228,7 @@ export default function EditPostPage({ params }: EditPostPageProps) {
                 
                 {previewUrl && (
                   <div className="w-20 h-12 rounded-lg border overflow-hidden relative group">
-                    <img src={previewUrl} className="w-full h-full object-cover" alt="Preview" />
+                    <Image src={previewUrl} className="w-full h-full object-cover" alt="Preview" />
                     <button
                       type="button"
                       onClick={() => {
